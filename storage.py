@@ -23,7 +23,12 @@ def save_books(books: list[Book]):
 def add_book(book: Book) -> bool:
     """Возвращает False, если книга уже существует (дубликат по автор + название)"""
     books = load_books()
-    
+
+    # Проверка на дубликаты
+    for b in books:
+        if b.author.lower() == book.author.lower() and b.title.lower() == book.title.lower():
+            return False
+            
     books.append(book)
     save_books(books)
     return True
